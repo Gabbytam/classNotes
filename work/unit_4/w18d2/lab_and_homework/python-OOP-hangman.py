@@ -3,7 +3,7 @@ class Word():
         self.word = list(chosen_word)
         self.guesses = []
         #cap is the amount of wrong guesses a user is allowed
-        self.cap = 6
+        self.cap = 8
         self.fill = ['_'] * len(chosen_word)
         self.over = False
     
@@ -16,30 +16,56 @@ class Word():
             letter = input('Guess a letter: ' )
             print(letter)
             #check if letter is in list 
+
+            # for i, char in enumerate(self.word):
+            #     #if guessed letter and char match, go into the fill and replace value with the letter
+            #     if letter == char:
+            #         self.fill[i] = letter
+            #     else:
+            #         #this is where you would add the guesses if its not in the word and if they havent guessed it already
+            #         if letter not in self.guesses: 
+            #             self.guesses.append(letter)
+      
+            # print(self.fill)
+
+            # while letter in self.word:
+
+            # if letter in self.word:
+            #     print('found her')
+            #     index = self.word.index(letter)
+            #     print('where it at', index)
         
-            #while not ValueError, keep checking 
-            while True:
-                try:
+            #while finding index doesnt return ValueError, keep checking 
+            # while True:
+            if letter in self.word: 
+                while letter in self.word:
                     index = self.word.index(letter)
                     print('where it at', index)
                     # get the word and replace the letter with -
-                    # self.word = self.word.pop(index)
-                    self.word.slice(index, index + 1)
+                    self.word[index] = '*'
+                    # fill the blank with the letter 
+                    self.fill[index] = letter
+            else: 
+                print('letter is not in word')
+                #this is where you would add the guesses if its not in the word and if they havent guessed it already
+                if letter not in self.guesses: 
+                    self.guesses.append(letter)
 
-                except ValueError:
-                    print('letter is not in word')
-                    #this is where you would add the guesses
-                    #append it to guesses only if its not in the word
-                    #also do a check to see if user has already guessed the letter
-                    if letter not in self.guesses: 
-                        self.guesses.append(letter)
-                    break
-                else:
-                    print('you guessed right!')
-                    #this is where you will replace the fill with the letters at the index
-                    break
+                # except ValueError:
+                #     print('letter is not in word')
+                #     #this is where you would add the guesses if its not in the word and if they havent guessed it already
+                #     if letter not in self.guesses: 
+                #         self.guesses.append(letter)
+                #     break
+                # else:
+                #     pass
+                # #     print('you guessed right!')
+                # #     #this is where you will replace the fill with the letters at the index
+                # #     break
 
             #this happens after every input 
+            print(self.word)
+            print(self.fill)
             print('Letters Guessed: ', self.guesses)
             print('how many guesses', len(self.guesses))
             # check if user is out of guesses
@@ -52,17 +78,10 @@ class Word():
 
 
 python = Word('pythonp')
-python.print_word()
+#python.print_word()
 python.play_game()
 
-# some variables here to prepare the wordlist, initialize things like
-# `remaining_guesses` (start a round with 8), `letters_used`, the `chosen_word` (randomly
-# chosen from a list of words you also declare here perhaps?),
-#and whatever else you might want to keep track of
 
-
-# a loop here that will cause game to play and be exited when user either wins or loses
-# see below for tips on how to structure this loop
 
 #assigment:
 # have a Word class
